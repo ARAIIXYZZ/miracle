@@ -1,48 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caroline Contact</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
-    <link rel="stylesheet" href="styles.css">
+    <title>Caroline Official</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
     <div class="container">
-        <img src="profile.jpg" alt="Profile Picture" class="profile-pic" onerror="this.style.display='none'; document.getElementById('placeholder-name').style.display='block';">
-        
-        <div id="placeholder-name" style="display:none; font-size: 2em; margin-bottom: 20px;">CAROLINE</div>
-
-        <h2 class="sub-name">Caroline Official</h2>
-
-        <p class="tagline">Tap below to connect.</p>
-
-        <div class="button-group">
-            <a id="btn-wa" 
-               href="https://rnebgl.datingdreamm.com/?utm_source=da57dc555e50572d&ban=other&j1=1&s1=241621&s2=2174989&s3=CAROLINE" 
-               class="btn btn-whatsapp" 
-               target="_blank" 
-               rel="noopener noreferrer">
-                <i class="fab fa-whatsapp icon"></i> CHAT ME ON WHATSAPP
-            </a>
-
-            <a id="btn-video" 
-               href="https://securetrkdisp.com/s?a=281172&sm=53068&co=343638&mt=19&s1=CAROLINE" 
-               class="btn btn-video" 
-               target="_blank" 
-               rel="noopener noreferrer">
-                <i class="fa-solid fa-camera-movie icon"></i> ACCESS PRIVATE VIDEOS
-            </a>
+        <!-- Background dengan efek partikel -->
+        <div class="background-animation">
+            <div class="particles"></div>
+            <div class="glow-effect"></div>
         </div>
         
+        <!-- Profil Section -->
+        <div class="profile-card">
+            <div class="profile-image-container">
+                <img src="profile.jpg" alt="Caroline Official" class="profile-image">
+                <div class="image-border"></div>
+                <div class="image-glow"></div>
+            </div>
+            
+            <h1 class="profile-name">Caroline Official</h1>
+            <p class="profile-tagline">Connect with me directly</p>
+            
+            <!-- Button Container -->
+            <div class="button-container">
+                <a href="https://rnebgl.datingdreamm.com/?utm_source=da57dc555e50572d&ban=other&j1=1&s1=241621&s2=2174989&s3=CAROLINE" 
+                   class="btn whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                    <div class="btn-glow"></div>
+                </a>
+                
+                <a href="https://securetrkdisp.com/s?a=281172&sm=53068&co=343638&mt=19&s1=CAROLINE" 
+                   class="btn video-btn" target="_blank">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Private Videos</span>
+                    <div class="btn-glow"></div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2023 Caroline Official. All rights reserved.</p>
+        </div>
     </div>
 
-    <script src="scripts.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>

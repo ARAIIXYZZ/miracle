@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: auto; /* Diubah dari hidden ke auto untuk scroll */
     position: relative;
 }
 
@@ -27,7 +27,7 @@ body {
     z-index: 1;
 }
 
-/* Background Glow Effects - DITAMBAH LEBIH BANYAK */
+/* Background Glow Effects */
 .glow-container {
     position: fixed;
     top: 0;
@@ -104,7 +104,7 @@ body {
     }
 }
 
-/* Container - DIPERBESAR */
+/* Container - DIPERBAIKI UNTUK SCROLL */
 .container {
     width: 100%;
     max-width: 550px;
@@ -112,7 +112,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* Diubah dari center ke flex-start */
     min-height: 100vh;
     position: relative;
     z-index: 3;
@@ -132,6 +132,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
+    margin: 20px 0; /* Tambahan margin untuk spacing */
 }
 
 .main-content::before {
@@ -469,6 +470,7 @@ body {
     position: relative;
     z-index: 3;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    padding-bottom: 20px; /* Tambahan padding untuk scroll */
 }
 
 /* Responsive Design - DIPERBAIKI */
@@ -551,4 +553,22 @@ body {
         height: 70px;
         font-size: 30px;
     }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #673ab7, #e91e63);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #7e57c2, #ec407a);
 }

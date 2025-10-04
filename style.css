@@ -13,11 +13,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto; /* Diubah dari hidden ke auto untuk scroll */
+    overflow: auto;
     position: relative;
 }
 
-/* Canvas untuk partikel */
+/* Canvas untuk partikel - DIKURANGI EFEKNYA */
 #particle-canvas {
     position: fixed;
     top: 0;
@@ -25,9 +25,10 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    opacity: 0.3; /* DIKURANGI OPACITY */
 }
 
-/* Background Glow Effects */
+/* Background Glow Effects - DIKURANGI JUMLAHNYA */
 .glow-container {
     position: fixed;
     top: 0;
@@ -41,70 +42,39 @@ body {
 .glow-circle {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    animation: float 8s ease-in-out infinite;
+    filter: blur(60px); /* DIKURANGI BLUR */
+    opacity: 0.2; /* DIKURANGI OPACITY */
+    animation: float 12s ease-in-out infinite; /* DIPERLAMBAT */
 }
 
 .glow-1 {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     background: radial-gradient(circle, #673ab7 0%, transparent 70%);
-    top: 5%;
-    left: 5%;
+    top: 10%;
+    left: 10%;
     animation-delay: 0s;
 }
 
 .glow-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, #e91e63 0%, transparent 70%);
-    bottom: 5%;
-    right: 5%;
-    animation-delay: 2s;
-}
-
-.glow-3 {
     width: 350px;
     height: 350px;
-    background: radial-gradient(circle, #2196f3 0%, transparent 70%);
-    top: 60%;
-    left: 80%;
-    animation-delay: 4s;
-}
-
-/* GLOW BARU DI BAWAH */
-.glow-4 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, #ff5722 0%, transparent 70%);
-    bottom: 10%;
-    left: 10%;
-    animation-delay: 1s;
-}
-
-.glow-5 {
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, #4caf50 0%, transparent 70%);
-    top: 20%;
-    right: 15%;
-    animation-delay: 3s;
+    background: radial-gradient(circle, #e91e63 0%, transparent 70%);
+    bottom: 15%;
+    right: 10%;
+    animation-delay: 6s;
 }
 
 @keyframes float {
     0%, 100% { 
-        transform: translateY(0px) rotate(0deg) scale(1); 
+        transform: translateY(0px) scale(1); 
     }
-    33% { 
-        transform: translateY(-20px) rotate(120deg) scale(1.1); 
-    }
-    66% { 
-        transform: translateY(10px) rotate(240deg) scale(0.9); 
+    50% { 
+        transform: translateY(-15px) scale(1.05); 
     }
 }
 
-/* Container - DIPERBAIKI UNTUK SCROLL */
+/* Container */
 .container {
     width: 100%;
     max-width: 550px;
@@ -112,15 +82,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Diubah dari center ke flex-start */
+    justify-content: flex-start;
     min-height: 100vh;
     position: relative;
     z-index: 3;
 }
 
-/* Main Content - DIPERBESAR dan DIPENUHI */
+/* Main Content - EFEK UTAMA TETAP DI PERTAHANKAN */
 .main-content {
-    background: rgba(20, 20, 30, 0.85);
+    background: rgba(20, 20, 30, 0.9); /* DIKASIH LEBIH TEBAL */
     backdrop-filter: blur(20px);
     border-radius: 30px;
     padding: 50px 35px;
@@ -132,7 +102,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
-    margin: 20px 0; /* Tambahan margin untuk spacing */
+    margin: 20px 0;
 }
 
 .main-content::before {
@@ -164,7 +134,7 @@ body {
     100% { background-position: 300% 0; }
 }
 
-/* Logo Container - DIPERBESAR */
+/* Logo Container */
 .logo-container {
     margin-bottom: 35px;
 }
@@ -240,7 +210,7 @@ body {
     100% { transform: scale(1.4); opacity: 0; border-width: 0px; }
 }
 
-/* Name Container - DIUBAH UNTUK SATU BARIS */
+/* Name Container */
 .name-container {
     margin-bottom: 25px;
     position: relative;
@@ -299,7 +269,7 @@ body {
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Button Container - DIPERBAIKI */
+/* Button Container */
 .button-container {
     display: flex;
     flex-direction: column;
@@ -308,7 +278,7 @@ body {
     margin-bottom: 35px;
 }
 
-/* Buttons - DIPERBESAR dan DI TENGAH */
+/* Buttons */
 .btn {
     display: flex;
     align-items: center;
@@ -425,7 +395,7 @@ body {
     50% { background-position: 100% 50%; }
 }
 
-/* Info Section Baru */
+/* Info Section */
 .info-section {
     display: flex;
     justify-content: space-around;
@@ -470,10 +440,10 @@ body {
     position: relative;
     z-index: 3;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    padding-bottom: 20px; /* Tambahan padding untuk scroll */
+    padding-bottom: 20px;
 }
 
-/* Responsive Design - DIPERBAIKI */
+/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 30px 20px;

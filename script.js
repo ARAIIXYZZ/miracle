@@ -1,10 +1,10 @@
-// Enhanced Particle System
+// Enhanced Particle System with MORE PARTICLES
 class ParticleSystem {
     constructor() {
         this.canvas = document.getElementById('particle-canvas');
         this.ctx = this.canvas.getContext('2d');
         this.particles = [];
-        this.numberOfParticles = 100;
+        this.numberOfParticles = 200; // DITAMBAH dari 100 menjadi 200
         this.mouse = {
             x: 0,
             y: 0,
@@ -50,7 +50,7 @@ class ParticleSystem {
     }
     
     animate() {
-        this.ctx.fillStyle = 'rgba(12, 12, 12, 0.1)';
+        this.ctx.fillStyle = 'rgba(12, 12, 12, 0.05)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Update and draw particles
@@ -58,16 +58,16 @@ class ParticleSystem {
             this.particles[i].update(this.mouse);
             this.particles[i].draw(this.ctx);
             
-            // Connect particles with lines
+            // Connect particles with lines - LEBIH BANYAK KONEKSI
             for (let j = i + 1; j < this.particles.length; j++) {
                 const dx = this.particles[i].x - this.particles[j].x;
                 const dy = this.particles[i].y - this.particles[j].y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 
-                if (distance < 100) {
+                if (distance < 120) { // JARAK DIKURANGI untuk lebih banyak koneksi
                     this.ctx.beginPath();
-                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - distance/100)})`;
-                    this.ctx.lineWidth = 0.5;
+                    this.ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * (1 - distance/120)})`;
+                    this.ctx.lineWidth = 0.8;
                     this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
                     this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
                     this.ctx.stroke();
@@ -83,13 +83,14 @@ class Particle {
     constructor(width, height) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.size = Math.random() * 4 + 1;
-        this.speedX = Math.random() * 2 - 1;
-        this.speedY = Math.random() * 2 - 1;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 3 - 1.5; // LEBIH CEPAT
+        this.speedY = Math.random() * 3 - 1.5; // LEBIH CEPAT
         this.color = this.getRandomColor();
-        this.alpha = Math.random() * 0.6 + 0.2;
+        this.alpha = Math.random() * 0.8 + 0.2; // LEBIH TERANG
         this.originalSize = this.size;
         this.oscillation = Math.random() * Math.PI * 2;
+        this.oscillationSpeed = Math.random() * 0.03 + 0.01; // VARIASI KECEPATAN
     }
     
     getRandomColor() {
@@ -99,16 +100,18 @@ class Particle {
             'rgba(33, 150, 243, ALPHA)',    // Blue
             'rgba(255, 87, 34, ALPHA)',     // Orange
             'rgba(76, 175, 80, ALPHA)',     // Green
+            'rgba(255, 193, 7, ALPHA)',     // Yellow
+            'rgba(156, 39, 176, ALPHA)',    // Deep Purple
             'rgba(255, 255, 255, ALPHA)'    // White
         ];
         return colors[Math.floor(Math.random() * colors.length)].replace('ALPHA', this.alpha);
     }
     
     update(mouse) {
-        // Oscillation movement
-        this.oscillation += 0.02;
-        this.x += this.speedX + Math.sin(this.oscillation) * 0.5;
-        this.y += this.speedY + Math.cos(this.oscillation) * 0.5;
+        // Oscillation movement dengan variasi kecepatan
+        this.oscillation += this.oscillationSpeed;
+        this.x += this.speedX + Math.sin(this.oscillation) * 0.8;
+        this.y += this.speedY + Math.cos(this.oscillation) * 0.8;
         
         // Mouse interaction
         const dx = mouse.x - this.x;
@@ -116,44 +119,78 @@ class Particle {
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance < mouse.radius) {
-            this.size = this.originalSize * 2.5;
+            this.size = this.originalSize * 3;
             // Push particles away from mouse
             const force = (mouse.radius - distance) / mouse.radius;
-            this.speedX = -dx * 0.02 * force;
-            this.speedY = -dy * 0.02 * force;
+            this.speedX = -dx * 0.03 * force;
+            this.speedY = -dy * 0.03 * force;
         } else {
             this.size = this.originalSize;
         }
         
-        // Bounce off walls with damping
+        // Bounce off walls dengan lebih smooth
         if (this.x <= 0 || this.x >= this.canvasWidth) {
-            this.speedX *= -0.9;
+            this.speedX *= -0.8;
             this.x = this.x <= 0 ? 1 : this.canvasWidth - 1;
         }
         if (this.y <= 0 || this.y >= this.canvasHeight) {
-            this.speedY *= -0.9;
+            this.speedY *= -0.8;
             this.y = this.y <= 0 ? 1 : this.canvasHeight - 1;
         }
         
         // Slow down over time
-        this.speedX *= 0.995;
-        this.speedY *= 0.995;
+        this.speedX *= 0.998;
+        this.speedY *= 0.998;
     }
     
     draw(ctx) {
         ctx.save();
         
-        // Glow effect
-        ctx.shadowBlur = 20;
+        // Enhanced glow effect
+        ctx.shadowBlur = 25;
         ctx.shadowColor = this.color.replace('rgba', 'rgb').replace(/,[^)]+\)/, ')');
         
         ctx.globalAlpha = this.alpha;
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        
+        // Random shape for variety
+        if (Math.random() > 0.7) {
+            // Star shape occasionally
+            this.drawStar(ctx, this.x, this.y, this.size, this.size * 0.5, 5);
+        } else {
+            // Circle shape
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        }
+        
         ctx.fill();
         
         ctx.restore();
+    }
+    
+    drawStar(ctx, cx, cy, outerRadius, innerRadius, points) {
+        const rot = Math.PI / 2 * 3;
+        let x = cx;
+        let y = cy;
+        const step = Math.PI / points;
+        
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - outerRadius);
+        
+        for (let i = 0; i < points; i++) {
+            x = cx + Math.cos(rot) * outerRadius;
+            y = cy + Math.sin(rot) * outerRadius;
+            ctx.lineTo(x, y);
+            rot += step;
+            
+            x = cx + Math.cos(rot) * innerRadius;
+            y = cy + Math.sin(rot) * innerRadius;
+            ctx.lineTo(x, y);
+            rot += step;
+        }
+        
+        ctx.lineTo(cx, cy - outerRadius);
+        ctx.closePath();
     }
     
     get canvasWidth() {
@@ -167,7 +204,7 @@ class Particle {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize enhanced particle system
+    // Initialize enhanced particle system with MORE PARTICLES
     new ParticleSystem();
     
     // Enhanced button interactions
@@ -236,6 +273,11 @@ document.addEventListener('DOMContentLoaded', function() {
             33% { transform: translateY(-5px) rotate(0.5deg); }
             66% { transform: translateY(3px) rotate(-0.5deg); }
         }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
     `;
     document.head.appendChild(style);
     
@@ -265,4 +307,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(infoStyle);
+    
+    // Ensure page is scrollable on all devices
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
 });

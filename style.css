@@ -1,167 +1,319 @@
-/* CSS Variables untuk Tema Gelap Modern (TIDAK BERUBAH) */
-:root {
-    --color-bg-dark: #121212; 
-    --color-text-light: #E0E0E0; 
-    --color-accent-wa: #25D366; 
-    --color-accent-video: #FF0077; 
-    --color-card-dark: #1F1F1F; 
-    --color-shadow: rgba(0, 0, 0, 0.5); 
-    --font-main: 'Poppins', sans-serif; 
-}
-
-/* Reset dan Styling Dasar (TIDAK BERUBAH) */
-body {
-    font-family: var(--font-main);
-    background-color: var(--color-bg-dark);
-    color: var(--color-text-light);
+/* Reset dan Base Styles */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    color: #fff;
     min-height: 100vh;
-    text-align: center;
-    background-image: radial-gradient(circle at top left, #300015 0%, transparent 40%),
-                      radial-gradient(circle at bottom right, #00150a 0%, transparent 50%);
-    background-attachment: fixed;
-    transition: background-color 0.5s ease;
-}
-
-/* Kontainer Utama/Card (TIDAK BERUBAH) */
-.container {
-    width: 90%;
-    max-width: 400px;
-    padding: 30px 20px;
-    background-color: var(--color-card-dark);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px var(--color-shadow), 0 0 50px rgba(255, 0, 119, 0.15); 
-    transform: translateY(0);
-    animation: fadeIn 1s ease-out;
-}
-
-/* Animasi Masuk (TIDAK BERUBAH) */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Foto Profil (TIDAK BERUBAH) */
-.profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 4px solid var(--color-accent-video); 
-    box-shadow: 0 0 18px var(--color-accent-video); 
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.profile-pic:hover {
-    transform: scale(1.05) rotate(1deg); 
-    box-shadow: 0 0 30px var(--color-accent-video); 
-}
-
-/* Nama Utama (Caroline Official) - DISESUAIKAN */
-.sub-name {
-    font-size: 2.2em; /* Jadikan ini nama utama, ukuran lebih besar */
-    font-weight: 600; 
-    color: var(--color-text-light); /* Warna teks utama */
-    margin-top: -10px; 
-    margin-bottom: 10px; /* Kurangi jarak dengan tagline */
-    letter-spacing: 1.5px;
-    opacity: 1;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    animation: none; /* Hilangkan animasi berkedip pada nama utama */
-}
-
-/* Tagline/Deskripsi Singkat (Pengganti p) */
-.tagline {
-    font-size: 1.1em;
-    color: var(--color-accent-video); /* Gunakan warna aksen untuk menarik */
-    font-weight: 500;
-    margin-bottom: 30px;
-    margin-top: 0;
-    animation: pulseGlow 2s infinite alternate; /* Tambahkan animasi glow ke tagline */
-}
-
-@keyframes pulseGlow {
-    from { opacity: 0.8; text-shadow: 0 0 2px var(--color-accent-video); }
-    to { opacity: 1; text-shadow: 0 0 8px var(--color-accent-video); }
-}
-
-/* Area Tombol, Gaya Tombol, Efek Hover/Kilauan (TIDAK BERUBAH) */
-.button-group {
     display: flex;
-    flex-direction: column; 
-    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
 }
 
-.btn {
-    display: flex; 
+/* Background Animation */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+        radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.2), transparent),
+        radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.2), transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: particlesMove 20s linear infinite;
+}
+
+@keyframes particlesMove {
+    from { transform: translateY(0px); }
+    to { transform: translateY(200px); }
+}
+
+.glow-effect {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(103,58,183,0.3) 0%, rgba(103,58,183,0) 70%);
+    top: 10%;
+    left: 10%;
+    filter: blur(40px);
+    animation: glowMove 15s ease-in-out infinite alternate;
+}
+
+@keyframes glowMove {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(100px, 50px) scale(1.2); }
+    100% { transform: translate(-50px, 100px) scale(0.8); }
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 18px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.15em;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    min-height: 100vh;
+}
+
+/* Profile Card */
+.profile-card {
+    background: rgba(25, 25, 35, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-whatsapp {
-    background-color: var(--color-accent-wa);
-    color: var(--color-bg-dark);
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
-.btn-video {
-    background-color: var(--color-accent-video);
-    color: var(--color-text-light);
-}
-
-.btn:hover {
-    transform: scale(1.03) translateY(-3px); 
-    opacity: 1;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-}
-
-.btn-whatsapp:hover {
-    box-shadow: 0 0 25px var(--color-accent-wa);
-}
-
-.btn-video:hover {
-    box-shadow: 0 0 25px var(--color-accent-video);
-}
-
-.btn::after {
+.profile-card::before {
     content: '';
     position: absolute;
     top: 0;
-    left: -150%;
-    width: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #673ab7, #e91e63, #2196f3);
+    animation: borderGradient 3s ease infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes borderGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Profile Image */
+.profile-image-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+}
+
+.profile-image {
+    width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent); 
-    transform: skewX(-30deg);
-    transition: left 0.7s ease;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    border: 3px solid transparent;
+    background: linear-gradient(45deg, #673ab7, #e91e63, #2196f3) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
 }
 
-.btn:hover::after {
-    left: 150%; 
+.image-border {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #673ab7, #e91e63, #2196f3);
+    z-index: 1;
+    animation: rotate 3s linear infinite;
 }
 
-.icon {
-    margin-right: 12px;
-    font-size: 1.3em;
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-@media (min-width: 600px) {
+.image-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #673ab7, #e91e63, #2196f3);
+    filter: blur(15px);
+    opacity: 0.5;
+    z-index: 0;
+    animation: pulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.3; transform: scale(0.95); }
+    100% { opacity: 0.7; transform: scale(1.05); }
+}
+
+/* Profile Text */
+.profile-name {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #fff, #e0e0e0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
+}
+
+.profile-tagline {
+    font-size: 16px;
+    color: #b0b0b0;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Buttons */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.btn:hover .btn-glow {
+    left: 100%;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+    background: linear-gradient(45deg, #25D366, #128C7E);
+    color: white;
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* Video Button */
+.video-btn {
+    background: linear-gradient(45deg, #E91E63, #9C27B0);
+    color: white;
+}
+
+.video-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+}
+
+/* Footer */
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
     .container {
-        padding: 50px 40px;
+        padding: 15px;
+    }
+    
+    .profile-card {
+        padding: 25px 20px;
+    }
+    
+    .profile-image-container {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .profile-name {
+        font-size: 24px;
+    }
+    
+    .btn {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-image-container {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-name {
+        font-size: 22px;
+    }
+    
+    .profile-tagline {
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 12px 18px;
+        font-size: 14px;
     }
 }
